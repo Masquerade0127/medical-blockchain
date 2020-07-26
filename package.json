@@ -1,0 +1,16 @@
+{
+  "name": "blood",
+  "version": "1.0.0",
+  "description": "smart contract and back-end api of Blood project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "le hai trieu",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "fabric-contract-api": "^2.2.0",
+    "fabric-shim": "^2.2.0"
+  }
+}
