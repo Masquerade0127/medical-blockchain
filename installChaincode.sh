@@ -1,16 +1,16 @@
-echo "Mr. Trieu. Please, input chaincode name"
-read name 
-echo "Mr. Trieu. Please, input chaincode version"
+echo "Hello travelers, this is the script code to install smart contract written by Mr. Le Hai Trieu. glad to see you here :')"
+echo "================="
+echo "The contract used in this script is bloody contract, also develop by Mr. Le Hai Trieu"
+echo "Travelers. Please, input chaincode version. I recommend using [hour].[date].[year] to specify version of contract, just like 1631.2809.2021"
+echo "Mr. Trieu said that, just ensure that will be the unique version on the network :)"
 read version
-echo "Mr. Trieu. Please, input your chaincode path"
-read path
 
-echo "chaincode name: " $name
+echo "chaincode name: blood"
 echo "chaincode version: " $version
 
 export chaincodeVersion=$name_$version
-export chaincodeName=$name".tar.gz"
-export chaincodePath=$path"/"
+export chaincodeName="blood.tar.gz"
+export chaincodePath="../bloody-blockchain/"
 
 echo ${chaincodeVersion}
 echo ${chaincodeName}
@@ -48,7 +48,8 @@ echo "==================================== chaincode has been installed on org2 
 
 peer lifecycle chaincode queryinstalled
 
-echo "Mr. Trieu. Please input package id"
+echo "Travelers. Please input package id. It's showing up in the line above"
+echo "This step is very importance, please contact to Mr. Trieu if you need any support :)"
 read packageID
 
 export CC_PACKAGE_ID=${packageID}
@@ -73,13 +74,9 @@ echo "==================================== chaincode has been commit on both org
 
 peer lifecycle chaincode querycommitted --channelID mychannel --name $name --cafile "${PWD}/organizations/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem"
 
-echo "Mr. Trieu. Please, input the init function of your chaincode"
-
-read initFunction
-
 echo "==================================== init chaincode ===================================="
 
-peer chaincode invoke -o localhost:7050 --ordererTLSHostnameOverride orderer.example.com --tls --cafile "${PWD}/organizations/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem" -C mychannel -n $name --peerAddresses localhost:7051 --tlsRootCertFiles "${PWD}/organizations/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt" --peerAddresses localhost:9051 --tlsRootCertFiles "${PWD}/organizations/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/tls/ca.crt" -c '{"function":"'$initFunction'","Args":[]}'
+peer chaincode invoke -o localhost:7050 --ordererTLSHostnameOverride orderer.example.com --tls --cafile "${PWD}/organizations/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem" -C mychannel -n $name --peerAddresses localhost:7051 --tlsRootCertFiles "${PWD}/organizations/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt" --peerAddresses localhost:9051 --tlsRootCertFiles "${PWD}/organizations/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/tls/ca.crt" -c '{"function":"instantiate","Args":[]}'
 
 echo "==================================== set data ===================================="
 
@@ -89,3 +86,4 @@ echo "==================================== query ===============================
 
 peer chaincode query -C mychannel -n blood -c '{"Args":["queryProfile", "20033078"]}'
 
+echo "This is the end of tutorial, thank you for your efforts, Traveler. Have a good day :)"
