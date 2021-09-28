@@ -4,7 +4,8 @@
   "description": "smart contract and back-end api of Blood project",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "fabric-chaincode-node start"
   },
   "author": "le hai trieu",
   "license": "ISC",
