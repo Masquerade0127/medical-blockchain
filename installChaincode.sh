@@ -1,16 +1,18 @@
 echo "Hello travelers, this is the script code to install smart contract written by Mr. Le Hai Trieu. glad to see you here :')"
 echo "================="
-echo "The contract used in this script is bloody contract, also develop by Mr. Le Hai Trieu"
+echo "The contract used in this script is medical contract, also develop by Mr. Le Hai Trieu"
 echo "Travelers. Please, input chaincode version. I recommend using [hour].[date].[year] to specify version of contract, just like 1631.2809.2021"
 echo "Mr. Trieu said that, just ensure that will be the unique version on the network :)"
-read version
 
-echo "chaincode name: blood"
+name = "medical"
+version = "0201.1302.2022"
+
+echo "chaincode name: " $name
 echo "chaincode version: " $version
 
 export chaincodeVersion=$name_$version
-export chaincodeName="blood.tar.gz"
-export chaincodePath="../bloody-blockchain/"
+export chaincodeName="medical.tar.gz"
+export chaincodePath="../medical-blockchain/"
 
 echo ${chaincodeVersion}
 echo ${chaincodeName}
@@ -78,12 +80,20 @@ echo "==================================== init chaincode ======================
 
 peer chaincode invoke -o localhost:7050 --ordererTLSHostnameOverride orderer.example.com --tls --cafile "${PWD}/organizations/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem" -C mychannel -n $name --peerAddresses localhost:7051 --tlsRootCertFiles "${PWD}/organizations/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt" --peerAddresses localhost:9051 --tlsRootCertFiles "${PWD}/organizations/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/tls/ca.crt" -c '{"function":"instantiate","Args":[]}'
 
-echo "==================================== set data ===================================="
+echo "==================================== set package data ===================================="
 
-peer chaincode invoke -o localhost:7050 --ordererTLSHostnameOverride orderer.example.com --tls --cafile "${PWD}/organizations/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem" -C mychannel -n blood --peerAddresses localhost:7051 --tlsRootCertFiles "${PWD}/organizations/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt" --peerAddresses localhost:9051 --tlsRootCertFiles "${PWD}/organizations/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/tls/ca.crt" -c '{"function":"createProfile","Args":["20033078","Trieu","25","19960327","AB","5"]}'
+peer chaincode invoke -o localhost:7050 --ordererTLSHostnameOverride orderer.example.com --tls --cafile "${PWD}/organizations/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem" -C mychannel -n $name --peerAddresses localhost:7051 --tlsRootCertFiles "${PWD}/organizations/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt" --peerAddresses localhost:9051 --tlsRootCertFiles "${PWD}/organizations/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/tls/ca.crt" -c '{"function":"createPackageData","Args":["pkg001","package 001","20220213","spl001","supplier 001"]}'
 
-echo "==================================== query ===================================="
+echo "==================================== set equipment data ===================================="
 
-peer chaincode query -C mychannel -n blood -c '{"Args":["queryProfile", "20033078"]}'
+peer chaincode invoke -o localhost:7050 --ordererTLSHostnameOverride orderer.example.com --tls --cafile "${PWD}/organizations/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem" -C mychannel -n $name --peerAddresses localhost:7051 --tlsRootCertFiles "${PWD}/organizations/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt" --peerAddresses localhost:9051 --tlsRootCertFiles "${PWD}/organizations/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/tls/ca.crt" -c '{"function":"createEquipment","Args":["eqm001","equipment 001","100","cai","pkg001"]}'
+
+echo "==================================== query package ===================================="
+
+peer chaincode query -C mychannel -n $name -c '{"Args":["queryDataPackage", "pkg001"]}'
+
+echo "==================================== query equipment ===================================="
+
+peer chaincode query -C mychannel -n $name -c '{"Args":["queryEquipData", "eqm001"]}'
 
 echo "This is the end of tutorial, thank you for your efforts, Traveler. Have a good day :)"
