@@ -1,9 +1,9 @@
 'use strict';
 
-class BloodCommon {
-    bloodValidation(bloodObject){
-        if(!bloodObject){
-            throw new Error('blood object null');
+class MedicalCommon {
+    medicalValidation(bloodObject){
+        if(!medicalObject){
+            throw new Error('medical object null');
         }
 
         if(!arguments[0]){
@@ -12,4 +12,4 @@ class BloodCommon {
     }
 }
 
-module.exports = BloodCommon;
+module.exports = MedicaCommon;
