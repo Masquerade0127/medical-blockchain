@@ -1,5 +1,5 @@
 {
-  "name": "blood",
+  "name": "medical",
   "version": "1.0.0",
   "description": "smart contract and back-end api of Blood project",
   "main": "index.js",
