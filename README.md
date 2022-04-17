@@ -1,2 +1,2 @@
-# bloody-blockchain
-bloody blockchain project
+# medical-blockchain
+medical blockchain project
